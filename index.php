@@ -103,7 +103,7 @@
 <div class="container">
   <main>
     <div class="py-5 text-center">
-      <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+      <img class="d-block mx-auto mb-4" src="img/logobc.png" alt="" width="72" height="57">
       <h2>BECKO</h2>
       <p class="lead">Um rolê underground com o melhor do tech house. Venha curtir uma noite cheia de vibe e surpresas. Não fique de fora!</div>
     <h5>Data: 07 Dezembro <b>15h00 - 00h00</b></h5>
