@@ -172,12 +172,7 @@
               
             </div>
 			
-<!--
-            <div class="col-12">
-              <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">          
-            </div>
--->
+
             <div class="col-12">
               <label for="address" class="form-label">whattsap</label>
               <input type="text" class="form-control" id="address" placeholder="(19) 0.0000-0000" required>             
