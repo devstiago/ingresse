@@ -42,7 +42,7 @@
                 $this->NomeEvento = $row["NOME_EVENTO"];
                 $this->DescEvento = $row["DESC_EVENTO"];
                 $this->DescData   = $row["DESC_DATA"];
-                $this->DescHora   = $row["DESC_DATA"];
+                $this->DescHora   = $row["DESC_HORA"];
                 $this->Local      = $row["DESC_LOCAL"];
                 
                 $return_ = true;

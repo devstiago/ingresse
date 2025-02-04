@@ -204,8 +204,39 @@
 </div>
 
 
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" language="javascript">
+      window.onload = function() {
+        CARREGA_EVENTO();
+     }
 
-      <script src="dist/js/checkout.js"></script>
+     function CARREGA_EVENTO(){
+     
+      $.ajax({
+                    type: 'GET',  
+                     dataType: 'JSON',              
+                    url: 'control/CarregaEvento.php', 
+                    success: function(result) { 
+                    
+                      if(result[0].codigo_retorno == 1){  
+                        
+                        alert(result[0].NomeEvento);
+                      }else{
+                        alert(result[0].msg);
+                        //window.location.href = "erro400.php";            
+                      }
+                       
+                    },
+                    error: function(error) {
+                        alert('erro..');
+                    }
+        });
+
+     }
+
+    </script>
+
+    <script src="dist/js/jquery/jquery.min.js"></script>
+    <!-- <script src="../assets/dist/js/bootstrap.bundle.min.js"></script> -->
+      <!-- <script src="dist/js/checkout.js"></script> -->
   </body>
 </html>
