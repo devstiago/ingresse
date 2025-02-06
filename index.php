@@ -104,11 +104,11 @@
   <main>
     <div class="py-5 text-center">
       <img class="d-block mx-auto mb-4" src="img/logobc.png" alt="" width="72" height="57">
-      <h2>BECKO</h2>
-      <p class="lead">Um rolê underground com o melhor do tech house. Venha curtir uma noite cheia de vibe e surpresas. Não fique de fora!</div>
-    <h5>Data: 07 Dezembro <b>15h00 - 00h00</b></h5>
-	<h5>Horario: 15h00 - 00h00</h5>
-	<h5>Local: Bar do Ivan</h5>
+      <h2><div id="dNOME_EVENTO"></div></h2>
+      <p class="lead"><div id="dDESC_EVENTO"></div></div>
+      <h5> <div id="dDESC_DATA"> </div> </h5>
+	    <h5> <div id="dDESC_HORA"> </div> </h5>
+	    <h5> <div id="dDESC_LOCAL"></div> </h5>
           <hr class="my-4">
 
     <div class="row g-5">
@@ -219,9 +219,15 @@
                     
                       if(result[0].codigo_retorno == 1){  
                         
-                        alert(result[0].NomeEvento);
+                        document.querySelector("#dNOME_EVENTO").innerHTML = result[0].NomeEvento;
+                        document.querySelector("#dDESC_EVENTO").innerHTML = result[0].DescEvento;
+                        document.querySelector("#dDESC_DATA").innerHTML   = 'Data:' + result[0].DescData;
+                        document.querySelector("#dDESC_HORA").innerHTML   = 'Horario:' + result[0].DescHora;
+                        document.querySelector("#dDESC_LOCAL").innerHTML  = 'Local:' + result[0].Local;
+                                           
                       }else{
                         alert(result[0].msg);
+                        
                         //window.location.href = "erro400.php";            
                       }
                        
