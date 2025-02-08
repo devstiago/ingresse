@@ -1,12 +1,16 @@
 <?php
 
 include_once '../model/evento.php';  
+include_once '../model/ticket.php'; 
 
 $myEVENTO = new cEvento();
+$myTICKET = new cTicket();
 
 $return_arr = array();
     
     if($myEVENTO->GetEvento()){
+
+      $myTICKET->GetInfoIngresso();
 
         //Se encontrar o evento retorna um json com as info
         $return_arr[] = array("codigo_retorno" => 1,
@@ -14,7 +18,10 @@ $return_arr = array();
                                    "DescEvento" => $myEVENTO->DescEvento,
                                   "DescData"   => $myEVENTO->DescData,
                                   "DescHora"   => $myEVENTO->DescHora,
-                                  "Local"      => $myEVENTO->Local                
+                                  "Local"      => $myEVENTO->Local,
+                                  "vValor"    => $myTICKET->Valor,
+                                  "vTaxa"     => $myTICKET->taxa,
+                                  "vTotal"    => $myTICKET->total                
                                 );
 
                                      

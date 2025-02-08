@@ -123,14 +123,14 @@
               <h6 class="my-0">Ingresso</h6>
               <small class="text-body-secondary">Ing antecipado</small>
             </div>
-            <span class="text-body-secondary">R$25,00</span>
+            <span class="text-body-secondary"><div id="dDESC_VALOR"></div></span>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
               <h6 class="my-0">Taxa Serv.</h6>
               <small class="text-body-secondary">Taxa plataforma</small>
             </div>
-            <span class="text-body-secondary">R$1,00</span>
+            <span class="text-body-secondary"><div id="dDESC_TAXA"></div></span>
           </li>
           <!--
           <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
@@ -143,7 +143,7 @@
 		  -->
           <li class="list-group-item d-flex justify-content-between">
             <span>Total</span>
-            <strong>R$26,00</strong>
+            <strong><div id="dDESC_TOTAL"></div></strong>
           </li>
         </ul>
 
@@ -224,7 +224,10 @@
                         document.querySelector("#dDESC_DATA").innerHTML   = 'Data:' + result[0].DescData;
                         document.querySelector("#dDESC_HORA").innerHTML   = 'Horario:' + result[0].DescHora;
                         document.querySelector("#dDESC_LOCAL").innerHTML  = 'Local:' + result[0].Local;
-                                           
+                        
+                        document.querySelector("#dDESC_VALOR").innerHTML  = 'R$' + result[0].vValor;
+                        document.querySelector("#dDESC_TAXA").innerHTML  = 'R$' + result[0].vTaxa;
+                        document.querySelector("#dDESC_TOTAL").innerHTML  = 'R$' + result[0].vTotal;
                       }else{
                         alert(result[0].msg);
                         
