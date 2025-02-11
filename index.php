@@ -189,7 +189,11 @@
 
           <hr class="my-4">
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Comprar Ingresso</button>
+          <a id="bcomp" class="w-100 btn btn-primary btn-lg" onClick="COMPRAR_TICKET()" type="submit">
+            <span id="bload1" role="status" aria-hidden="true"></span>
+            <span id="bload_te1">Comprar Ingresso</span>
+          </a>
+        
         </form>
       </div>
     </div>
@@ -209,6 +213,28 @@
         CARREGA_EVENTO();
      }
 
+     function COMPRAR_TICKET(){
+      
+       document.getElementById("bload_te1").innerText = " Aguarde...";
+       document.getElementById("bload1").classList.add('spinner-border', 'spinner-border-sm');
+       document.getElementById("bcomp").disabled = true;
+      
+       //alert('aqui');
+
+       $.ajax({
+                    type: 'GET',  
+                     dataType: 'JSON',              
+                    url: 'control/ComprarTicket.php', 
+                    success: function(result) { 
+
+
+                    }, error: function(error) {
+                        alert('erro..');
+                    }
+        });
+
+     }
+
      function CARREGA_EVENTO(){
      
       $.ajax({
@@ -225,9 +251,20 @@
                         document.querySelector("#dDESC_HORA").innerHTML   = 'Horario:' + result[0].DescHora;
                         document.querySelector("#dDESC_LOCAL").innerHTML  = 'Local:' + result[0].Local;
                         
-                        document.querySelector("#dDESC_VALOR").innerHTML  = 'R$' + result[0].vValor;
-                        document.querySelector("#dDESC_TAXA").innerHTML  = 'R$' + result[0].vTaxa;
-                        document.querySelector("#dDESC_TOTAL").innerHTML  = 'R$' + result[0].vTotal;
+                        const v1formatado = result[0].vValor.toLocaleString('pt-BR', { 
+                                                style: 'currency', currency: 'BRL' });
+
+                        document.querySelector("#dDESC_VALOR").innerHTML  = v1formatado;
+                        
+                        const v2formatado = result[0].vTaxa.toLocaleString('pt-BR', { 
+                                               style: 'currency', currency: 'BRL' });
+
+                        document.querySelector("#dDESC_TAXA").innerHTML  = v2formatado;
+
+                        const v3formatado = result[0].vTotal.toLocaleString('pt-BR', { 
+                                               style: 'currency', currency: 'BRL' });
+
+                        document.querySelector("#dDESC_TOTAL").innerHTML  = v3formatado;
                       }else{
                         alert(result[0].msg);
                         

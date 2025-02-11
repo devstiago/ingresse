@@ -23,6 +23,7 @@
 
         public function GetInfoIngresso(){
            
+            //At this point, you can fetch information from the database.
             $this->Valor = 25;
             $this->taxa = 1;
             $this->total   = 26;
