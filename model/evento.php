@@ -8,7 +8,8 @@
     }
     
     class cEvento {
-        
+
+        public $CODIGO;
         public $NomeEvento;
         public $DescEvento;
         public $DescData;
@@ -38,7 +39,7 @@
             if(mysqli_num_rows($result) <= 0){
                 //Não encontrou nenhum evento ativo
             }else{
-
+                $this->CODIGO     = $row["CODIGO"];
                 $this->NomeEvento = $row["NOME_EVENTO"];
                 $this->DescEvento = $row["DESC_EVENTO"];
                 $this->DescData   = $row["DESC_DATA"];

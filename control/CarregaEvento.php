@@ -14,6 +14,7 @@ $return_arr = array();
 
         //Se encontrar o evento retorna um json com as info
         $return_arr[] = array("codigo_retorno" => 1,
+                                  "CodigoEvento" => $myEVENTO->CODIGO,
                                   "NomeEvento" => $myEVENTO->NomeEvento,
                                    "DescEvento" => $myEVENTO->DescEvento,
                                   "DescData"   => $myEVENTO->DescData,

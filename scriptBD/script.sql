@@ -9,3 +9,17 @@ CREATE TABLE `A001_TABEVENTO` (
   `ATIVO` int(11) NOT NULL,
   PRIMARY KEY (`CODIGO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `A002_TABTICKET` (
+  `CODIGO` int(11) NOT NULL AUTO_INCREMENT,
+  `REL_EVENTO` int(11) NOT NULL,
+  `REL_PAGAMENTO` int(11) NOT NULL,
+  `NOME` varchar(100) NOT NULL,
+  `CPF` varchar(30),
+  `FONE` varchar(30),
+  `EMAIL` varchar(100),
+  `DATAHORA` varchar(30),
+  `GEROU_PIX` int(11),
+  `PAGOU` int(11),
+  PRIMARY KEY (`CODIGO`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

@@ -103,6 +103,9 @@
 <div class="container">
   <main>
     <div class="py-5 text-center">
+   
+      <input type="hidden" id="HIDDEN_CODIGO_EVENTO" name="HIDDEN_CODIGO_EVENTO" value="0">
+                
       <img class="d-block mx-auto mb-4" src="img/logobc.png" alt="" width="72" height="57">
       <h2><div id="dNOME_EVENTO"></div></h2>
       <p class="lead"><div id="dDESC_EVENTO"></div></div>
@@ -162,26 +165,26 @@
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">Nome</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <input type="text" class="form-control" id="p_NOME" placeholder="" value="" required>
              
             </div>
 
             <div class="col-sm-6">
               <label for="lastName" class="form-label">CPF</label>
-              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+              <input type="text" class="form-control" id="p_CPF" placeholder="" value="" required>
               
             </div>
 			
 
             <div class="col-12">
               <label for="address" class="form-label">whattsap</label>
-              <input type="text" class="form-control" id="address" placeholder="(19) 0.0000-0000" required>             
+              <input type="text" class="form-control" id="p_FONE" placeholder="(19) 0.0000-0000" required>             
             </div>
 
 
             <div class="col-12">
               <label for="address" class="form-label">E-mail</label>
-              <input type="text" class="form-control" id="address" placeholder="email@com.br" required>             
+              <input type="text" class="form-control" id="p_EMAIL" placeholder="email@com.br" required>             
             </div>
 			
           </div>
@@ -219,18 +222,32 @@
        document.getElementById("bload1").classList.add('spinner-border', 'spinner-border-sm');
        document.getElementById("bcomp").disabled = true;
       
-       //alert('aqui');
-
        $.ajax({
                     type: 'GET',  
                      dataType: 'JSON',              
                     url: 'control/ComprarTicket.php', 
+                    data : { p_RELEVENTO : document.querySelector("#HIDDEN_CODIGO_EVENTO").value,
+                                  p_NOME : document.querySelector("#p_NOME").value,
+                                   p_CPF : document.querySelector("#p_CPF").value,
+                                  p_FONE : document.querySelector("#p_FONE").value,
+                                 p_EMAIL : document.querySelector("#p_EMAIL").value          
+                      },
                     success: function(result) { 
-
+                      if(result[0].codigo_retorno == 1){
+                        alert(result[0].msg);
+                        //window.location.href = "paymentPIX.php";
+                      }else{
+                        alert(result[0].msg);
+                      }
 
                     }, error: function(error) {
                         alert('erro..');
-                    }
+                    },
+                       complete: function(jqXHR, textStatus) {
+                        document.getElementById("bload_te1").innerText = "Comprar Ingresso";
+                        document.getElementById("bload1").classList.remove('spinner-border', 'spinner-border-sm');
+                        document.getElementById("bcomp").disabled = false;
+                       }
         });
 
      }
@@ -265,6 +282,9 @@
                                                style: 'currency', currency: 'BRL' });
 
                         document.querySelector("#dDESC_TOTAL").innerHTML  = v3formatado;
+                     
+                        $('#HIDDEN_CODIGO_EVENTO').val(result[0].CodigoEvento);
+
                       }else{
                         alert(result[0].msg);
                         
