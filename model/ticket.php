@@ -92,6 +92,38 @@
 
         }
 
+        public function TemTicket(){
+            //retorna do banco as info do evento
+
+            $return_ = false;
+
+            $conn = OpenCon();
+             
+			$sql = "SELECT * FROM A002_TABTICKET WHERE CPF = $this->CPF";
+			$result = mysqli_query($conn, $sql);	 
+			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            
+            if(mysqli_num_rows($result) <= 0){
+                //Não encontrou nenhum evento ativo
+            }else{
+                $this->CODIGO        = $row["CODIGO"];
+                $this->REL_EVENTO    = $row["REL_EVENTO"];
+                $this->REL_PAGAMENTO = $row["REL_PAGAMENTO"];
+                $this->NOME          = $row["NOME"];
+                $this->CPF           = $row["CPF"];
+                $this->FONE          = $row["FONE"];
+                $this->EMAIL         = $row["EMAIL"];
+                $this->DATAHORA      = $row["DATAHORA"];
+                $this->GEROU_PIX     = $row["GEROU_PIX"];
+                $this->PAGOU         = $row["PAGOU"];
+ 
+                $return_ = true;
+            
+            }
+
+            return $return_;
+        }
+
 
     }
 

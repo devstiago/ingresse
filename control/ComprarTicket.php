@@ -48,12 +48,14 @@ $return_arr = array();
 
 if($VALIDA_OK == 1){
 
-  //Verifica se ja esta na list $myTICKET->TemTicket();
-  //Se false
-  $myTICKET->ComprarTicket();
-  //Tem pagamento Pendente - Se tem Mostra Qrcode
-  //Se Não -> Gera QrCodePagamento
-
+  if($myTICKET->TemTicket()){
+    //$myTICKET->GeraPagamento();
+  }else{
+    $myTICKET->ComprarTicket();
+    //$myTICKET->GeraPagamento();
+  }
+  
+  
   $return_arr[] = array("codigo_retorno" => 1,
                         "msg" => 'Pagamento Gerado',
                         "CODIGO_TICKET" => $myTICKET->CODIGO
