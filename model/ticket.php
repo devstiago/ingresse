@@ -25,6 +25,8 @@
         public $GEROU_PIX;
         public $PAGOU;
 
+        public $REL_TICKET;
+
 
         public function __construct()
         {
@@ -122,6 +124,40 @@
             }
 
             return $return_;
+        }
+
+        public function TemPagamentoPendente(){
+            $return_ = false;
+
+            $conn = OpenCon();
+             
+			$sql = "SELECT * FROM P001_TABPAGAMENTO WHERE REL_TICKET = $this->CODIGO";
+			$result = mysqli_query($conn, $sql);	 
+			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            
+            if(mysqli_num_rows($result) <= 0){
+                //Não encontrou nenhum pagamento ativo
+            }else{
+                $this->REL_TICKET  = $row["CODIGO"];
+               
+                //Update no ticket com rel_pagamento
+                $return_ = true;
+            
+            }
+
+            return $return_;
+        }
+
+        public function GeraPagamento(){
+            
+            //$this->CODIGO procura algum pagamento com o REL_TICKET estatus pendente ou aprovado
+            if($this->TemPagamentoPendente()){
+
+            }else{
+            //Gera novo Pagamento e da update no Ticket
+
+            }
+
         }
 
 

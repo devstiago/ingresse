@@ -49,10 +49,10 @@ $return_arr = array();
 if($VALIDA_OK == 1){
 
   if($myTICKET->TemTicket()){
-    //$myTICKET->GeraPagamento();
+    $myTICKET->GeraPagamento();
   }else{
-    $myTICKET->ComprarTicket();
-    //$myTICKET->GeraPagamento();
+    $myTICKET->ComprarTicket(); 
+    $myTICKET->GeraPagamento();
   }
   
   

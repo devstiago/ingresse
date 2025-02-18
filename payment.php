@@ -117,38 +117,11 @@
     <div class="row g-5">
       <div class="col-md-5 col-lg-4 order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Ingresso</span>
+          <span class="text">Pix QrCode</span>
           
         </h4>
-        <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Ingresso</h6>
-              <small class="text-body-secondary">Ing antecipado</small>
-            </div>
-            <span class="text-body-secondary"><div id="dDESC_VALOR"></div></span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Taxa Serv.</h6>
-              <small class="text-body-secondary">Taxa plataforma</small>
-            </div>
-            <span class="text-body-secondary"><div id="dDESC_TAXA"></div></span>
-          </li>
-          <!--
-          <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
-            <div class="text-success">
-              <h6 class="my-0">Promo code</h6>
-              <small>----</small>
-            </div>
-            <span class="text-success">−$5</span>
-          </li>
-		  -->
-          <li class="list-group-item d-flex justify-content-between">
-            <span>Total</span>
-            <strong><div id="dDESC_TOTAL"></div></strong>
-          </li>
-        </ul>
+       
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://www.seusite.com" alt="QR Code">
 
 		<!--
         <form class="card p-2">
@@ -160,42 +133,24 @@
 		-->
       </div>
       <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">Informe para gerar o Ingresso</h4>
+        <h4 class="mb-3">Copia e Cola</h4>
         <form class="needs-validation" novalidate>
           <div class="row g-3">
-            <div class="col-sm-6">
-              <label for="firstName" class="form-label">Nome</label>
-              <input type="text" class="form-control" id="p_NOME" placeholder="" value="" required>
+            <div class="col-sm-12">
+              <label for="firstName" class="form-label">Código Pix</label>
+              <input type="text" class="form-control" id="p_CODIGO" placeholder="" value="" required>
              
             </div>
 
-            <div class="col-sm-6">
-              <label for="lastName" class="form-label">CPF</label>
-              <input type="text" class="form-control" id="p_CPF" placeholder="" value="" required>
-              
-            </div>
-			
-
-            <div class="col-12">
-              <label for="address" class="form-label">whattsap</label>
-              <input type="text" class="form-control" id="p_FONE" placeholder="(19) 0.0000-0000" required>             
-            </div>
-
-
-            <div class="col-12">
-              <label for="address" class="form-label">E-mail</label>
-              <input type="text" class="form-control" id="p_EMAIL" placeholder="email@com.br" required>             
-            </div>
-			
           </div>
 
 
           <hr class="my-4">
-
-          <a id="bcomp" class="w-100 btn btn-primary btn-lg" onClick="COMPRAR_TICKET()" type="submit">
+          Após o pagamento o ingresso será enviado para seu whattsap. No dia do evento apresente o ingresso ou informe seu CPF na portaria.
+          <!-- <a id="bcomp" class="w-100 btn btn-primary btn-lg" onClick="COMPRAR_TICKET()" type="submit">
             <span id="bload1" role="status" aria-hidden="true"></span>
             <span id="bload_te1">Comprar Ingresso</span>
-          </a>
+          </a> -->
         
         </form>
       </div>
@@ -212,8 +167,15 @@
 
 
     <script type="text/javascript" language="javascript">
-      window.onload = function() {
+        
+        
+
+     window.onload = function() {
         CARREGA_EVENTO();
+
+        const texto = "https://www.seusite.com"; // Altere para o link desejado
+        const qrCodeURL = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encodeURIComponent(texto)}';
+        document.getElementById("qrcode").src = qrCodeURL;
      }
 
      function COMPRAR_TICKET(){
@@ -235,7 +197,7 @@
                     success: function(result) { 
                       if(result[0].codigo_retorno == 1){
                         alert(result[0].msg);
-                        window.location.href = "payment.php";
+                        //window.location.href = "paymentPIX.php";
                       }else{
                         alert(result[0].msg);
                       }
