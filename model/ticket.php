@@ -160,6 +160,31 @@
 
         }
 
+        public function GetPagamento(){
+            $return_ = false;
+
+            $conn = OpenCon();
+             
+			$sql = "SELECT * FROM A002_TABTICKET WHERE CODIGO = $this->CODIGO";
+			$result = mysqli_query($conn, $sql);	 
+			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            
+            if(mysqli_num_rows($result) <= 0){
+                //Não encontrou nenhum Ticket 
+            }else{
+                //Info do ticket
+
+                $this->NOME  = $row["NOME"];
+                $this->CPF   = $row["CPF"];
+                $this->CODIGOPIX = 'ADSEWQJKHKJHJKJSkdaHD'; 
+                
+                $return_ = true;
+            
+            }
+
+            return $return_;
+        }
+
 
     }
 

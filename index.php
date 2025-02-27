@@ -235,7 +235,7 @@
                     success: function(result) { 
                       if(result[0].codigo_retorno == 1){
                         alert(result[0].msg);
-                        window.location.href = "payment.php";
+                        window.location.href = "payment.php?x="+result[0].CODIGO_TICKET;
                       }else{
                         alert(result[0].msg);
                       }

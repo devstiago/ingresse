@@ -105,7 +105,10 @@
     <div class="py-5 text-center">
    
       <input type="hidden" id="HIDDEN_CODIGO_EVENTO" name="HIDDEN_CODIGO_EVENTO" value="0">
+             
+      <input type="hidden" id="HIDDEN_CODIGO_TICKET" name="HIDDEN_CODIGO_TICKET" value="<?php echo $_GET['x'];   ?>">
                 
+      
       <img class="d-block mx-auto mb-4" src="img/logobc.png" alt="" width="72" height="57">
       <h2><div id="dNOME_EVENTO"></div></h2>
       <p class="lead"><div id="dDESC_EVENTO"></div></div>
@@ -133,12 +136,16 @@
 		-->
       </div>
       <div class="col-md-7 col-lg-8">
+        <!-- <h5 class="mb-3">Ingresso: Daniel Santiago - 417.344.148-71</h5> -->
+        <h5 class="mb-3">
+          <div id="dNOME"> </div>
+        </h5>
         <h4 class="mb-3">Copia e Cola</h4>
         <form class="needs-validation" novalidate>
           <div class="row g-3">
             <div class="col-sm-12">
               <label for="firstName" class="form-label">Código Pix</label>
-              <input type="text" class="form-control" id="p_CODIGO" placeholder="" value="" required>
+              <input type="text" class="form-control" id="p_CODIGOPIX" placeholder="" value="" required>
              
             </div>
 
@@ -172,6 +179,7 @@
 
      window.onload = function() {
         CARREGA_EVENTO();
+        CARREGA_PAGAMENTO();
 
         const texto = "https://www.seusite.com"; // Altere para o link desejado
         const qrCodeURL = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encodeURIComponent(texto)}';
@@ -258,6 +266,57 @@
                         alert('erro..');
                     }
         });
+
+     }
+
+     function CARREGA_PAGAMENTO(){
+
+        $.ajax({
+                    type: 'GET',  
+                     dataType: 'JSON',              
+                    url: 'control/CarregaPagamento.php', 
+                    data : { p_CODIGO : document.querySelector("#HIDDEN_CODIGO_TICKET").value},
+                    success: function(result) { 
+                    
+                      if(result[0].codigo_retorno == 1){  
+
+                        
+            
+                         document.querySelector("#dNOME").innerHTML = 'Ingresso: '+result[0].NOME +' - '+result[0].CPF;
+                        // document.querySelector("#dDESC_EVENTO").innerHTML = result[0].DescEvento;
+                        // document.querySelector("#dDESC_DATA").innerHTML   = 'Data:' + result[0].DescData;
+                        // document.querySelector("#dDESC_HORA").innerHTML   = 'Horario:' + result[0].DescHora;
+                        // document.querySelector("#dDESC_LOCAL").innerHTML  = 'Local:' + result[0].Local;
+                        
+                        // const v1formatado = result[0].vValor.toLocaleString('pt-BR', { 
+                        //                         style: 'currency', currency: 'BRL' });
+
+                        // document.querySelector("#dDESC_VALOR").innerHTML  = v1formatado;
+                        
+                        // const v2formatado = result[0].vTaxa.toLocaleString('pt-BR', { 
+                        //                        style: 'currency', currency: 'BRL' });
+
+                        // document.querySelector("#dDESC_TAXA").innerHTML  = v2formatado;
+
+                        // const v3formatado = result[0].vTotal.toLocaleString('pt-BR', { 
+                        //                        style: 'currency', currency: 'BRL' });
+
+                        // document.querySelector("#dDESC_TOTAL").innerHTML  = v3formatado;
+                     
+                         $('#p_CODIGOPIX').val(result[0].CodigoPIX);
+
+                      }else{
+                        alert(result[0].msg);
+                        
+                        //window.location.href = "erro400.php";            
+                      }
+                       
+                    },
+                    error: function(error) {
+                        alert('erro..');
+                    }
+        });
+
 
      }
 
